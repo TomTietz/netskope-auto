@@ -1,4 +1,5 @@
 #!/bin/bash
+# This script checks the latency on a Netskope publisher and saves the log files when it exceeds a threshold
 
 # Directories
 LOG_DIR="$HOME/netskope_mon"
@@ -7,10 +8,9 @@ ZIP_SOURCE_DIR="$HOME/logs"
 # Ensure the target directory exists
 mkdir -p "$LOG_DIR"
 
-
 # Target domain and latency threshold (in ms)
-TARGET_DOMAIN="mtr -rb stitcher.npa.goskope.com"
-THRESHOLD_LATENCY=100
+TARGET_DOMAIN="stitcher.npa.goskope.com"
+THRESHOLD_LATENCY=100 # Adjust this value to change latency time at which script should save logs
 
 # Ping the target domain and extract latency
 LATENCY=$(ping -c 1 "$TARGET_DOMAIN" | grep 'time=' | awk -F 'time=' '{print $2}' | awk '{print $1}')
